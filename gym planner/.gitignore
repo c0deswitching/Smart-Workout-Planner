@@ -1,0 +1,44 @@
+# Ignore build artifacts
+backend/build/
+backend/bin/
+
+# Ignore dependencies
+frontend/node_modules/
+frontend/dist/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore Claude configuration
+CLAUDE.md
+.claude/
+
+# Ignore cache files
+*.cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore package-lock when using npm
+package-lock.json
