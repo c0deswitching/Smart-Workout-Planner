@@ -1,0 +1,764 @@
+[
+    {
+        "muscle_groups": [
+            "Chest",
+            "Triceps",
+            "Shoulders"
+        ],
+        "exercise": "Bench Press",
+        "equipment": "Barbell + Bench"
+    },
+    {
+        "muscle_groups": [
+            "Chest"
+        ],
+        "exercise": "Incline Dumbbell Press",
+        "equipment": "Dumbbells + Incline Bench"
+    },
+    {
+        "muscle_groups": [
+            "Chest"
+        ],
+        "exercise": "Dumbbell Chest Fly",
+        "equipment": "Dumbbells + Flat Bench"
+    },
+    {
+        "muscle_groups": [
+            "Chest",
+            "Triceps",
+            "Shoulders"
+        ],
+        "exercise": "Push-Up",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Chest"
+        ],
+        "exercise": "Cable Chest Fly",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Dumbbell Shoulder Press",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Arnold Press",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Dumbbell Lateral Raise",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Reverse Dumbbell Fly",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Machine Shoulder Press",
+        "equipment": "Shoulder Press Machine"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Cable Lateral Raise",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Biceps"
+        ],
+        "exercise": "Pull-Up / Chin-Up",
+        "equipment": "Pull-Up Bar"
+    },
+    {
+        "muscle_groups": [
+            "Back"
+        ],
+        "exercise": "Inverted Row",
+        "equipment": "Bar or Smith Machine"
+    },
+    {
+        "muscle_groups": [
+            "Back"
+        ],
+        "exercise": "Lat Pulldown",
+        "equipment": "Lat Pulldown Machine"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Biceps"
+        ],
+        "exercise": "Dumbbell Row",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Biceps"
+        ],
+        "exercise": "Barbell Row",
+        "equipment": "Barbell + Bench"
+    },
+    {
+        "muscle_groups": [
+            "Back"
+        ],
+        "exercise": "Seated Cable Row",
+        "equipment": "Cable Row Machine"
+    },
+    {
+        "muscle_groups": [
+            "Back"
+        ],
+        "exercise": "Assisted Pull-Up",
+        "equipment": "Assisted Pull-Up Machine"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Dumbbell Curl",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Hammer Curl",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Barbell Curl",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Cable Curl",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Resistance Band Curl",
+        "equipment": "Resistance Bands"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Tricep Dips",
+        "equipment": "Bench / Dip Bars"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Dumbbell Overhead Triceps Extension",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Tricep Pushdown",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Close-Grip Push-Up",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Machine Triceps Extension",
+        "equipment": "Triceps Machine"
+    },
+    {
+        "muscle_groups": [
+            "Quads"
+        ],
+        "exercise": "Bodyweight Squat",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Quads",
+            "Glutes"
+        ],
+        "exercise": "Goblet Squat",
+        "equipment": "Dumbbell"
+    },
+    {
+        "muscle_groups": [
+            "Quads"
+        ],
+        "exercise": "Bulgarian Split Squat",
+        "equipment": "Dumbbells / Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Quads",
+            "Glutes"
+        ],
+        "exercise": "Barbell Back Squat",
+        "equipment": "Barbell + Rack"
+    },
+    {
+        "muscle_groups": [
+            "Quads"
+        ],
+        "exercise": "Leg Extension",
+        "equipment": "Leg Extension Machine"
+    },
+    {
+        "muscle_groups": [
+            "Hamstrings",
+            "Glutes"
+        ],
+        "exercise": "Romanian Deadlift",
+        "equipment": "Barbell / Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Hamstrings"
+        ],
+        "exercise": "Glute Bridge (Hamstring Focus)",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Hamstrings"
+        ],
+        "exercise": "Lying Leg Curl",
+        "equipment": "Lying Leg Curl Machine"
+    },
+    {
+        "muscle_groups": [
+            "Hamstrings"
+        ],
+        "exercise": "Seated Leg Curl",
+        "equipment": "Seated Hamstring Curl Machine"
+    },
+    {
+        "muscle_groups": [
+            "Hamstrings"
+        ],
+        "exercise": "Stability Ball Leg Curl",
+        "equipment": "Exercise Ball"
+    },
+    {
+        "muscle_groups": [
+            "Glutes"
+        ],
+        "exercise": "Glute Bridge",
+        "equipment": "Bodyweight / Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Glutes"
+        ],
+        "exercise": "Hip Thrust",
+        "equipment": "Barbell / Dumbbells + Bench"
+    },
+    {
+        "muscle_groups": [
+            "Glutes"
+        ],
+        "exercise": "Dumbbell Romanian Deadlift",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Glutes"
+        ],
+        "exercise": "Cable Kickbacks",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Glutes"
+        ],
+        "exercise": "Step-Ups",
+        "equipment": "Box + Dumbbells / Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Calves"
+        ],
+        "exercise": "Standing Calf Raise",
+        "equipment": "Bodyweight / Smith Machine"
+    },
+    {
+        "muscle_groups": [
+            "Calves"
+        ],
+        "exercise": "Seated Calf Raise",
+        "equipment": "Seated Calf Raise Machine"
+    },
+    {
+        "muscle_groups": [
+            "Calves"
+        ],
+        "exercise": "Dumbbell Calf Raise",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Core",
+            "Shoulders"
+        ],
+        "exercise": "Plank",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Crunch",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Hanging Leg Raise",
+        "equipment": "Pull-Up Bar"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Cable Crunch",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Russian Twists",
+        "equipment": "Bodyweight / Dumbbell"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Bicycle Crunch",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Cardio"
+        ],
+        "exercise": "Treadmill Run/Walk",
+        "equipment": "Treadmill"
+    },
+    {
+        "muscle_groups": [
+            "Cardio"
+        ],
+        "exercise": "Stationary Bike",
+        "equipment": "Stationary Bike"
+    },
+    {
+        "muscle_groups": [
+            "Cardio"
+        ],
+        "exercise": "StairMaster",
+        "equipment": "StairMaster"
+    },
+    {
+        "muscle_groups": [
+            "Cardio"
+        ],
+        "exercise": "Rowing Machine",
+        "equipment": "Rower"
+    },
+    {
+        "muscle_groups": [
+            "Cardio"
+        ],
+        "exercise": "Jump Rope",
+        "equipment": "Jump Rope"
+    },
+    {
+        "muscle_groups": [
+            "Cardio"
+        ],
+        "exercise": "HIIT Bodyweight Circuit",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Glutes",
+            "Hamstrings"
+        ],
+        "exercise": "Deadlift",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Full Body",
+            "Shoulders",
+            "Quads"
+        ],
+        "exercise": "Clean and Press",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Chest"
+        ],
+        "exercise": "Machine Chest Press",
+        "equipment": "Chest Press Machine"
+    },
+    {
+        "muscle_groups": [
+            "Chest"
+        ],
+        "exercise": "Incline Push-Up",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders",
+            "Triceps"
+        ],
+        "exercise": "Overhead Press",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders",
+            "Chest"
+        ],
+        "exercise": "Landmine Press",
+        "equipment": "Landmine"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Hamstrings"
+        ],
+        "exercise": "Good Morning",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Back"
+        ],
+        "exercise": "Pendlay Row",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Glutes",
+            "Hamstrings"
+        ],
+        "exercise": "Trap Bar Deadlift",
+        "equipment": "Trap Bar"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Biceps"
+        ],
+        "exercise": "T-Bar Row",
+        "equipment": "T-Bar Machine"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Concentration Curl",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Preacher Curl",
+        "equipment": "EZ Bar or Preacher Machine"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Skull Crushers",
+        "equipment": "EZ Bar"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Overhead Cable Triceps Extension",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Quads",
+            "Glutes"
+        ],
+        "exercise": "Leg Press",
+        "equipment": "Leg Press Machine"
+    },
+    {
+        "muscle_groups": [
+            "Quads",
+            "Glutes"
+        ],
+        "exercise": "Hack Squat",
+        "equipment": "Hack Squat Machine"
+    },
+    {
+        "muscle_groups": [
+            "Hamstrings"
+        ],
+        "exercise": "Nordic Hamstring Curl",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Glutes",
+            "Hamstrings"
+        ],
+        "exercise": "Cable Pull Through",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Glutes",
+            "Hamstrings"
+        ],
+        "exercise": "Donkey Kicks",
+        "equipment": "Bodyweight / Cable"
+    },
+    {
+        "muscle_groups": [
+            "Glutes",
+            "Hamstrings"
+        ],
+        "exercise": "Smith Machine Hip Thrust",
+        "equipment": "Smith Machine"
+    },
+    {
+        "muscle_groups": [
+            "Calves"
+        ],
+        "exercise": "Donkey Calf Raise",
+        "equipment": "Donkey Calf Raise Machine"
+    },
+    {
+        "muscle_groups": [
+            "Calves"
+        ],
+        "exercise": "Barbell Calf Raise",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Sit-Up",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Core",
+            "Hip Flexors"
+        ],
+        "exercise": "Leg Raise",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Side Plank",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Core"
+        ],
+        "exercise": "Renegade Row",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Glutes",
+            "Hamstrings"
+        ],
+        "exercise": "Kettlebell Swing",
+        "equipment": "Kettlebell"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders",
+            "Core"
+        ],
+        "exercise": "Wall Walk",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Hollow Body Hold",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Chest",
+            "Shoulders"
+        ],
+        "exercise": "Clap Push-Up",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Biceps"
+        ],
+        "exercise": "Zottman Curl",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Tate Press",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Cuban Press",
+        "equipment": "Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Quads",
+            "Glutes"
+        ],
+        "exercise": "Step-Up",
+        "equipment": "Box + Dumbbells"
+    },
+    {
+        "muscle_groups": [
+            "Back",
+            "Biceps"
+        ],
+        "exercise": "Chin-Up",
+        "equipment": "Pull-Up Bar"
+    },
+    {
+        "muscle_groups": [
+            "Core",
+            "Obliques"
+        ],
+        "exercise": "Russian Twists",
+        "equipment": "Dumbbell"
+    },
+    {
+        "muscle_groups": [
+            "Back"
+        ],
+        "exercise": "Scapular Pull-Up",
+        "equipment": "Pull-Up Bar"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Dragon Flag",
+        "equipment": "Bodyweight"
+    },
+    {
+        "muscle_groups": [
+            "Chest"
+        ],
+        "exercise": "Machine Chest Fly",
+        "equipment": "Pec Deck Machine"
+    },
+    {
+        "muscle_groups": [
+            "Quads"
+        ],
+        "exercise": "Smith Machine Front Squat",
+        "equipment": "Smith Machine"
+    },
+    {
+        "muscle_groups": [
+            "Glutes"
+        ],
+        "exercise": "Cable Kickback",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Shoulders"
+        ],
+        "exercise": "Reverse Cable Fly",
+        "equipment": "Cable Machine"
+    },
+    {
+        "muscle_groups": [
+            "Calves"
+        ],
+        "exercise": "Smith Machine Calf Raise",
+        "equipment": "Smith Machine"
+    },
+    {
+        "muscle_groups": [
+            "Triceps"
+        ],
+        "exercise": "Close-Grip Bench Press",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Hamstrings"
+        ],
+        "exercise": "Good Morning",
+        "equipment": "Barbell"
+    },
+    {
+        "muscle_groups": [
+            "Core"
+        ],
+        "exercise": "Cable Woodchopper",
+        "equipment": "Cable Machine"
+    }
+]
