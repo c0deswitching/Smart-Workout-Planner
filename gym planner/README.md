@@ -12,54 +12,356 @@ An intelligent workout planner that generates personalized, balanced weekly sche
 
 ## 🚀 Development Environment Setup
 
-### Prerequisites
+### 📋 Prerequisites
 
-- **Backend**: C++ compiler with C++17 support, CMake 3.5+
-- **Frontend**: Node.js 16+, npm
+Before starting development, ensure you have the following installed:
 
-### 1. Clone and Setup
+#### For Backend Development:
+- **C++ Compiler**: GCC 7+ or Clang 6+ with C++17 support
+- **CMake**: Version 3.5 or higher
+- **Git**: For version control
+
+#### For Frontend Development:
+- **Node.js**: Version 16.0 or higher (LTS recommended)
+- **npm**: Version 7+ (comes with Node.js)
+- **Modern Browser**: Chrome, Firefox, Safari, or Edge
+
+### 🔧 System-Specific Installation
+
+#### 🐧 Linux (Ubuntu/Debian)
+```bash
+# Install C++ development tools
+sudo apt update
+sudo apt install build-essential cmake git
+
+# Install Node.js and npm
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Verify installations
+gcc --version
+cmake --version
+node --version
+npm --version
+```
+
+#### 🍎 macOS
+```bash
+# Install Xcode command line tools
+xcode-select --install
+
+# Install Homebrew (if not already installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install development tools
+brew install cmake git node npm
+
+# Verify installations
+gcc --version
+cmake --version
+node --version
+npm --version
+```
+
+#### 🪟 Windows
+```powershell
+# Option 1: Using Visual Studio (Recommended)
+# Download and install Visual Studio Community 2019+
+# Include "Desktop development with C++" workload
+
+# Install Node.js from https://nodejs.org/
+# Download the Windows Installer (.msi) for LTS version
+
+# Option 2: Using MSYS2/MinGW
+# Download MSYS2 from https://www.msys2.org/
+# Install MinGW-w64 toolchain
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake git
+
+# Verify installations
+gcc --version
+cmake --version
+node --version
+npm --version
+```
+
+### 📁 Project Structure Setup
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/c0deswitching/Smart-Workout-Planner.git
 cd Smart-Workout-Planner
+
+# 2. Verify project structure
+ls -la
+# Should show: backend/ frontend/ README.md CLAUDE.md
 ```
 
-### 2. Backend Setup (C++ + Simple HTTP Server)
+### 🔨 Backend Development Setup
 
+#### Step 1: Navigate to Backend Directory
 ```bash
 cd backend
+ls -la
+# Should show: src/ include/ data/ CMakeLists.txt
+```
 
-# Build the project (no external dependencies required)
+#### Step 2: Create Build Directory
+```bash
+# Create and enter build directory
 mkdir build && cd build
+
+# Alternative: Clean build (if rebuilding)
+rm -rf build && mkdir build && cd build
+```
+
+#### Step 3: Configure with CMake
+```bash
+# Generate build files
 cmake ..
+
+# For Debug build (recommended for development)
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+
+# For Release build (for production)
+cmake -DCMAKE_BUILD_TYPE=Release ..
+```
+
+#### Step 4: Compile the Project
+```bash
+# Build the project
 make
 
+# For faster compilation (use multiple cores)
+make -j$(nproc)          # Linux
+make -j$(sysctl -n hw.ncpu)  # macOS
+make -j8                 # Windows/Manual
+
+# Verify build artifacts
+ls -la bin/
+# Should show: smart_workout_planner (or .exe on Windows)
+```
+
+#### Step 5: Run the Backend Server
+```bash
 # Start the server
 ./bin/smart_workout_planner
+
+# Alternative: Run with logging
+./bin/smart_workout_planner > server.log 2>&1 &
+
+# Check if server is running
+curl http://localhost:8080/api/health
+# Should return: {"status":"ok","message":"Smart Workout Planner API is running"}
 ```
 
-The backend API will be available on `http://localhost:8080`
+#### 🔍 Backend Troubleshooting
+```bash
+# Check C++ compiler version
+gcc --version
+# Should be 7.0+ for C++17 support
 
-### 3. Frontend Setup (React + shadcn/ui)
+# Check CMake version
+cmake --version
+# Should be 3.5+
 
+# Clean build (if compilation fails)
+cd .. && rm -rf build && mkdir build && cd build
+cmake .. && make
+
+# Check for missing dependencies
+ldd bin/smart_workout_planner  # Linux
+otool -L bin/smart_workout_planner  # macOS
+```
+
+### ⚛️ Frontend Development Setup
+
+#### Step 1: Navigate to Frontend Directory
 ```bash
 cd frontend
+ls -la
+# Should show: src/ public/ package.json vite.config.ts
+```
 
-# Install dependencies
+#### Step 2: Install Dependencies
+```bash
+# Install all dependencies
 npm install
 
-# Start development server
-npm run dev
+# Alternative: Clean install
+rm -rf node_modules package-lock.json
+npm install
+
+# For faster installation (optional)
+npm ci  # Uses package-lock.json for consistent installs
 ```
 
-The web interface will be available on `http://localhost:5173`
-
-### 4. Quick Start (Both Servers)
-
+#### Step 3: Verify shadcn/ui Setup
 ```bash
-# From project root
-./start-demo.sh
+# Check if shadcn is properly configured
+ls -la src/components/ui/
+# Should show: button.tsx card.tsx input.tsx slider.tsx etc.
+
+# If components are missing, reinitialize shadcn
+npx shadcn@latest init
+npx shadcn@latest add button card input slider select
 ```
+
+#### Step 4: Development Server
+```bash
+# Start development server with hot reload
+npm run dev
+
+# Start on specific port
+npm run dev -- --port 3000
+
+# Start with network access
+npm run dev -- --host
+
+# Production build (for testing)
+npm run build
+npm run preview
+```
+
+#### Step 5: Verify Frontend
+```bash
+# Open browser to http://localhost:5173
+# Should see the Smart Workout Planner interface
+
+# Test API connection (in browser console)
+# fetch('http://localhost:8080/api/health').then(r => r.json()).then(console.log)
+```
+
+### 🔄 Full Development Workflow
+
+#### Option 1: Manual Start (Recommended for Development)
+```bash
+# Terminal 1: Start Backend
+cd backend/build
+./bin/smart_workout_planner
+
+# Terminal 2: Start Frontend
+cd frontend
+npm run dev
+
+# Open browser: http://localhost:5173
+```
+
+#### Option 2: Automated Start (Quick Testing)
+```bash
+# Create a start script
+cat > start-dev.sh << 'EOF'
+#!/bin/bash
+echo "🚀 Starting Smart Workout Planner Development Environment..."
+
+# Start backend in background
+cd backend/build
+./bin/smart_workout_planner > ../server.log 2>&1 &
+BACKEND_PID=$!
+echo "✅ Backend started (PID: $BACKEND_PID) - Logs: backend/server.log"
+
+# Wait for backend to start
+sleep 2
+curl -s http://localhost:8080/api/health > /dev/null
+if [ $? -eq 0 ]; then
+    echo "✅ Backend API responding on http://localhost:8080"
+else
+    echo "❌ Backend failed to start"
+    exit 1
+fi
+
+# Start frontend
+cd ../frontend
+echo "🎨 Starting frontend development server..."
+npm run dev
+EOF
+
+chmod +x start-dev.sh
+./start-dev.sh
+```
+
+### 🧪 Testing & Verification
+
+#### Backend Testing
+```bash
+# Test all API endpoints
+curl http://localhost:8080/api/health
+curl http://localhost:8080/api/users/status
+curl -X POST http://localhost:8080/api/users/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"height":175,"weight":70,"age":25,"gender":"male","intensity":3}'
+```
+
+#### Frontend Testing
+```bash
+# Run TypeScript check
+cd frontend
+npx tsc --noEmit
+
+# Check for linting issues
+npm run lint  # (if configured)
+
+# Build for production
+npm run build
+```
+
+### 🐛 Common Issues & Solutions
+
+#### Backend Issues
+```bash
+# Issue: "cmake not found"
+# Solution: Install CMake
+sudo apt install cmake  # Linux
+brew install cmake       # macOS
+
+# Issue: "C++17 features not available"
+# Solution: Update GCC/Clang
+sudo apt install gcc-9 g++-9  # Linux
+export CC=gcc-9 CXX=g++-9
+
+# Issue: "Port 8080 already in use"
+# Solution: Kill existing process
+lsof -ti:8080 | xargs kill -9
+```
+
+#### Frontend Issues
+```bash
+# Issue: "Module not found" errors
+# Solution: Reinstall dependencies
+rm -rf node_modules package-lock.json
+npm install
+
+# Issue: "shadcn components not found"
+# Solution: Add missing components
+npx shadcn@latest add button card input
+
+# Issue: API connection refused
+# Solution: Check backend is running
+curl http://localhost:8080/api/health
+```
+
+### 🔧 Development Tools (Optional)
+
+#### Recommended VS Code Extensions
+```json
+{
+  "recommendations": [
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next"
+  ]
+}
+```
+
+#### Environment Variables (Optional)
+```bash
+# Create .env files for configuration
+echo "VITE_API_URL=http://localhost:8080" > frontend/.env.development
+echo "PORT=8080" > backend/.env
+```
+
+The development environment is now ready! 🎉
 
 ## 🏗️ Architecture
 
