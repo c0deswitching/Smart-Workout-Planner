@@ -1,6 +1,6 @@
 #include "UserController.h"
 #include "../utils/SimpleJson.h"
-#include "../services/WorkoutPlanningService.h"
+#include "../services/AlgorithmAdapter.h"
 #include "../models/UserModels.h"
 #include <cmath>
 #include <ctime>
@@ -56,71 +56,92 @@ void UserController::analyzeProfile(const Request& req, Response& response)
                   << " G:" << userProfile.gender 
                   << " I:" << userProfile.training_intensity << std::endl;
         
-        // TODO: Parse arrays from JSON properly (for now using defaults)
-        userProfile.available_days = {"Monday", "Tuesday", "Thursday", "Friday"};
-        userProfile.muscle_priorities = {
-            {"Chest", "Medium"},
-            {"Back", "Medium"},
-            {"Shoulders", "Medium"},
-            {"Arms", "Medium"},
-            {"Legs", "Medium"},
-            {"Core", "Medium"},
-            {"Cardio", ""}
-        };
-        userProfile.available_equipment = {"Bodyweight", "Dumbbells", "Bench", "Barbell"};
+        // Parse availableDays array using new JSON array parsing
+        std::cout << "🔍 Debug - availableDays raw value: '" << requestData.getString("availableDays", "NOT_FOUND") << "'" << std::endl;
+        userProfile.available_days = requestData.getStringArray("availableDays", {"Monday", "Tuesday", "Thursday", "Friday"});
+        std::cout << "📅 Parsed " << userProfile.available_days.size() << " available days: ";
+        for (const auto& day : userProfile.available_days) {
+            std::cout << day << " ";
+        }
+        std::cout << std::endl;
         
-        // Analyze user profile using new service
-        models::AnalysisResults analysis = services::AnalysisService::AnalyzeUserProfile(userProfile);
+        // Parse muscleGroupPriorities object using new JSON object parsing
+        auto priorities = requestData.getObject("muscleGroupPriorities", {});
+        if (!priorities.empty()) {
+            // Convert unordered_map to map
+            for (const auto& pair : priorities) {
+                userProfile.muscle_priorities[pair.first] = pair.second;
+            }
+        } else {
+            // Default priorities
+            userProfile.muscle_priorities = {
+                {"Chest", "Medium"},
+                {"Back", "Medium"},
+                {"Shoulders", "Medium"},
+                {"Arms", "Medium"},
+                {"Legs", "Medium"},
+                {"Core", "Medium"}
+            };
+        }
+        
+        // Parse availableEquipment array using new JSON array parsing
+        userProfile.available_equipment = requestData.getStringArray("availableEquipment", {"Bodyweight", "Dumbbells", "Bench", "Barbell"});
+        std::cout << "🏋️ Parsed " << userProfile.available_equipment.size() << " equipment items: ";
+        for (const auto& eq : userProfile.available_equipment) {
+            std::cout << eq << " ";
+        }
+        std::cout << std::endl;
+        
+        // Analyze user profile using REAL algorithms
+        models::AnalysisResults analysis = services::AlgorithmAdapter::GenerateRealAnalysis(userProfile);
         
         std::cout << "📊 Analysis complete: BMI:" << analysis.bmi 
                   << " Cal:" << analysis.daily_calories 
                   << " Burn:" << analysis.weekly_calorie_burn << std::endl;
         
-        // Generate workout plan (placeholder for algorithm implementation)
-        models::WorkoutPlan workoutPlan = services::WorkoutPlanningService::GenerateWorkoutPlan(userProfile);
+        // Generate workout plan using REAL algorithms
+        models::WorkoutPlan workoutPlan = services::AlgorithmAdapter::GenerateRealWorkoutPlan(userProfile);
         
         std::cout << "💪 Workout plan generated: " << workoutPlan.name << std::endl;
         
-        // Build response with MOCK DATA for demonstration
-        SimpleJson responseJson;
-        responseJson.setBool("success", true);
+        // Build response with REAL DATA from algorithms using direct JSON construction
+        // to avoid SimpleJson string escaping issues
+        std::stringstream responseStream;
+        responseStream << "{";
+        responseStream << "\"success\":true,";
         
-        // Analysis results
-        SimpleJson analysisJson;
-        analysisJson.setDouble("bmi", std::round(analysis.bmi * 10) / 10.0);
-        analysisJson.setString("bmiStatus", analysis.bmi_status);
-        analysisJson.setInt("dailyCalories", analysis.daily_calories);
-        analysisJson.setInt("weeklyBurn", analysis.weekly_calorie_burn);
-        analysisJson.setInt("bmr", static_cast<int>(std::round(analysis.bmr)));
+        // Analysis results (REAL DATA)
+        responseStream << "\"analysis\":{";
+        responseStream << "\"bmi\":" << std::round(analysis.bmi * 10) / 10.0 << ",";
+        responseStream << "\"bmiStatus\":\"" << analysis.bmi_status << "\",";
+        responseStream << "\"dailyCalories\":" << analysis.daily_calories << ",";
+        responseStream << "\"weeklyBurn\":" << analysis.weekly_calorie_burn << ",";
+        responseStream << "\"bmr\":" << static_cast<int>(std::round(analysis.bmr));
+        responseStream << "},";
         
-        responseJson.setObject("analysis", analysisJson);
+        // Workout plan info (REAL DATA from algorithms)
+        responseStream << "\"workoutPlan\":{";
+        responseStream << "\"id\":\"" << workoutPlan.id << "\",";
+        responseStream << "\"name\":\"" << workoutPlan.name << "\",";
+        responseStream << "\"description\":\"" << workoutPlan.description << "\",";
+        responseStream << "\"created_at\":\"" << workoutPlan.created_at << "\",";
+        responseStream << "\"weeklyCalories\":" << workoutPlan.weekly_calories << ",";
         
-        // Workout plan info with MOCK DATA
-        SimpleJson planJson;
-        planJson.setString("id", workoutPlan.id);
-        planJson.setString("name", workoutPlan.name);
-        planJson.setString("description", workoutPlan.description);
-        planJson.setString("created_at", workoutPlan.created_at);
+        // Add real workout schedule directly as JSON object (not string)
+        if (!workoutPlan.weekly_schedule_json.empty()) {
+            responseStream << "\"weeklySchedule\":" << workoutPlan.weekly_schedule_json;
+        } else {
+            responseStream << "\"status\":\"Real algorithms executed - detailed schedule in development\"";
+        }
         
-        // Add MOCK weekly schedule for demonstration
-        std::string mockSchedule = "{"
-            "\"Monday\": {\"type\": \"strength\", \"focus\": \"Chest + Triceps\", \"duration\": 60},"
-            "\"Tuesday\": {\"type\": \"cardio\", \"focus\": \"HIIT Training\", \"duration\": 30},"
-            "\"Wednesday\": {\"type\": \"rest\", \"focus\": \"Recovery\", \"duration\": 0},"
-            "\"Thursday\": {\"type\": \"strength\", \"focus\": \"Back + Biceps\", \"duration\": 60},"
-            "\"Friday\": {\"type\": \"strength\", \"focus\": \"Legs + Glutes\", \"duration\": 75},"
-            "\"Saturday\": {\"type\": \"cardio\", \"focus\": \"Light Cardio\", \"duration\": 30},"
-            "\"Sunday\": {\"type\": \"rest\", \"focus\": \"Recovery\", \"duration\": 0}"
-            "}";
+        responseStream << "},";
+        responseStream << "\"userData\":" << req.body;
+        responseStream << "}";
         
-        planJson.setString("mockSchedule", mockSchedule);
-        planJson.setString("status", "MOCK DATA - Algorithm implementation pending");
+        std::string finalResponse = responseStream.str();
+        std::cout << "🚀 Sending direct JSON response..." << std::endl;
         
-        responseJson.setObject("workoutPlan", planJson);
-        responseJson.setObject("userData", requestData);
-
-        std::cout << "🚀 Sending response..." << std::endl;
-        response.setJson(responseJson.toString());
+        response.setJson(finalResponse);
         response.statusCode = 200;
 
     } catch (const std::exception& e) {
@@ -154,23 +175,32 @@ void UserController::generateWorkoutPlan(const Request& req, Response& response)
         userProfile.gender = requestData.getString("gender", "male");
         userProfile.training_intensity = requestData.getInt("intensity", 5);
         
-        // TODO: Parse arrays from JSON properly
-        userProfile.available_days = {"Monday", "Tuesday", "Thursday", "Friday"};
-        userProfile.muscle_priorities = {
-            {"Chest", "Medium"},
-            {"Back", "Medium"},
-            {"Shoulders", "Medium"},
-            {"Arms", "Medium"},
-            {"Legs", "Medium"},
-            {"Core", "Medium"},
-            {"Cardio", ""}
-        };
-        userProfile.available_equipment = {"Bodyweight", "Dumbbells", "Bench", "Barbell"};
+        // Parse arrays using new JSON parsing capabilities
+        userProfile.available_days = requestData.getStringArray("availableDays", {"Monday", "Tuesday", "Thursday", "Friday"});
         
-        // Generate workout plan
-        models::WorkoutPlan workoutPlan = services::WorkoutPlanningService::GenerateWorkoutPlan(userProfile);
+        auto priorities = requestData.getObject("muscleGroupPriorities", {});
+        if (!priorities.empty()) {
+            // Convert unordered_map to map
+            for (const auto& pair : priorities) {
+                userProfile.muscle_priorities[pair.first] = pair.second;
+            }
+        } else {
+            userProfile.muscle_priorities = {
+                {"Chest", "Medium"},
+                {"Back", "Medium"},
+                {"Shoulders", "Medium"},
+                {"Arms", "Medium"},
+                {"Legs", "Medium"},
+                {"Core", "Medium"}
+            };
+        }
         
-        // Build detailed response
+        userProfile.available_equipment = requestData.getStringArray("availableEquipment", {"Bodyweight", "Dumbbells", "Bench", "Barbell"});
+        
+        // Generate workout plan using REAL algorithms
+        models::WorkoutPlan workoutPlan = services::AlgorithmAdapter::GenerateRealWorkoutPlan(userProfile);
+        
+        // Build detailed response with REAL DATA
         SimpleJson responseJson;
         responseJson.setBool("success", true);
         
@@ -179,10 +209,14 @@ void UserController::generateWorkoutPlan(const Request& req, Response& response)
         planJson.setString("name", workoutPlan.name);
         planJson.setString("description", workoutPlan.description);
         planJson.setString("created_at", workoutPlan.created_at);
+        planJson.setInt("weeklyCalories", workoutPlan.weekly_calories);
         
-        // TODO: Add weekly schedule details once algorithm is implemented
-        // For now, return placeholder message
-        planJson.setString("status", "Plan generation algorithm pending implementation by teammate");
+        // Add real workout schedule if available
+        if (!workoutPlan.weekly_schedule_json.empty()) {
+            planJson.setString("weeklySchedule", workoutPlan.weekly_schedule_json);
+        } else {
+            planJson.setString("status", "Real algorithms executed successfully");
+        }
         
         responseJson.setObject("workoutPlan", planJson);
 
@@ -204,17 +238,36 @@ void UserController::getExercises(const Request& req, Response& response)
         // Get all exercises from database
         auto exercises = models::ExerciseDatabase::GetAllExercises();
         
-        // Build response
-        SimpleJson responseJson;
-        responseJson.setBool("success", true);
-        responseJson.setInt("count", static_cast<int>(exercises.size()));
+        // Build response with exercises array
+        std::stringstream responseStream;
+        responseStream << "{";
+        responseStream << "\"success\":true,";
+        responseStream << "\"count\":" << exercises.size() << ",";
+        responseStream << "\"exercises\":[";
         
-        // TODO: Convert exercises to JSON array
-        // For now, return count and placeholder message
-        responseJson.setString("message", "Exercise database loaded successfully");
-        responseJson.setString("note", "Exercise data serialization pending - algorithm implementation needed");
+        bool first = true;
+        for (const auto& exercise : exercises) {
+            if (!first) responseStream << ",";
+            first = false;
+            
+            responseStream << "{";
+            responseStream << "\"id\":\"" << exercise.id << "\",";
+            responseStream << "\"name\":\"" << exercise.name << "\",";
+            responseStream << "\"muscleGroup\":\"" << exercise.muscle_group << "\",";
+            responseStream << "\"equipment\":\"" << exercise.equipment << "\",";
+            responseStream << "\"isCompound\":" << (exercise.is_compound ? "true" : "false") << ",";
+            responseStream << "\"duration\":" << exercise.duration_minutes << ",";
+            responseStream << "\"difficulty\":\"" << exercise.difficulty << "\"";
+            if (!exercise.instructions.empty()) {
+                responseStream << ",\"instructions\":\"" << exercise.instructions << "\"";
+            }
+            responseStream << "}";
+        }
         
-        response.setJson(responseJson.toString());
+        responseStream << "]";
+        responseStream << "}";
+        
+        response.setJson(responseStream.str());
         response.statusCode = 200;
 
     } catch (const std::exception& e) {
@@ -248,9 +301,10 @@ void UserController::getStatus(const Request& req, Response& response)
     // Add algorithm status
     std::string algorithmsJson = "["
         "\"Analysis algorithms: IMPLEMENTED\","
-        "\"Workout generation: PLACEHOLDER (ready for teammate)\","
-        "\"Exercise filtering: PLACEHOLDER (ready for teammate)\","
-        "\"Edge case handling: PLACEHOLDER (ready for teammate)\""
+        "\"Workout generation: IMPLEMENTED\","
+        "\"Exercise filtering: IMPLEMENTED\","
+        "\"JSON parsing: IMPLEMENTED\","
+        "\"Edge case handling: IN PROGRESS\""
         "]";
     
     // Build the full response manually to include the arrays

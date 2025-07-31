@@ -94,8 +94,10 @@ struct WorkoutPlan {
     std::map<std::string, DayPlan> weekly_schedule;
     AnalysisResults analysis;
     std::string created_at;
+    int weekly_calories;
+    std::string weekly_schedule_json; // JSON representation of the schedule
     
-    WorkoutPlan() {}
+    WorkoutPlan() : weekly_calories(0) {}
 };
 
 // Exercise Database Structure

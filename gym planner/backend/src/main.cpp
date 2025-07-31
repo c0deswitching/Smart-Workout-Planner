@@ -57,7 +57,6 @@ int main() {
         std::cout << "🏋️ Smart Workout Planner Backend Starting..." << std::endl;
         std::cout << "⚡ Using C++ Simple HTTP Server (no external dependencies)" << std::endl;
         std::cout << "📋 Exercise Database: Loaded with 60+ exercises" << std::endl;
-        std::cout << "🧠 Algorithms: Analysis implemented, workout generation ready for teammate" << std::endl;
         std::cout << "🚀 Server running on http://localhost:8080" << std::endl;
         std::cout << "\n📍 Available endpoints:" << std::endl;
         std::cout << "   GET  /api/health                 - Health check" << std::endl;

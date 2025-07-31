@@ -5,8 +5,14 @@ project(smart_workout_planner CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Fetch nlohmann/json
+include(FetchContent)
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 # Include directories
 include_directories(src)
+include_directories(include)
 
 # Collect all source files
 file(GLOB_RECURSE SOURCES 
@@ -19,6 +25,7 @@ file(GLOB_RECURSE SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Link system libraries (for socket programming)
+target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} ws2_32 wsock32)
 elseif(UNIX)
