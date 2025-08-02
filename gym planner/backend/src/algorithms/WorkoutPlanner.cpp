@@ -457,12 +457,12 @@ vector<WorkoutSession> WorkoutPlanner::makePlan() {
         cout << "Error: No exercises loaded.\n";
         return plan;
     }
+    
     // Handle single day case
     if(user.hasOneDay()) {
         vector<Exercise> fullBody=makeDay();
         if(!fullBody.empty()) {
             string sessionName=getName(fullBody);
-            //makes the workout a full Session and adds in compound workouts like squats
             WorkoutSession session(user.workoutDays[0], fullBody,SessionType::FULL_BODY);
             session.setSessionName(sessionName);
             plan.push_back(session);
@@ -470,14 +470,14 @@ vector<WorkoutSession> WorkoutPlanner::makePlan() {
         return plan;
     }
 
-
-    //edge case to address if there are little exercises avaliable based on the equipment the user selected
+    // Edge case to address if there are little exercises available based on equipment
     vector<Exercise> available=filterEquipment(exercises);
 
     if (available.size()<5) {
         cout << "Warning: Few exercises available with current equipment.\n";
     }
-    //Get muscle priorities
+    
+    // Get muscle priorities
     vector<string> high=user.getHighMuscles();
     vector<string> medium=user.getMediumMuscles();
     vector<string> low=user.getLowMuscles();
@@ -485,6 +485,17 @@ vector<WorkoutSession> WorkoutPlanner::makePlan() {
     allMuscles.insert(allMuscles.end(),high.begin(),high.end());
     allMuscles.insert(allMuscles.end(),medium.begin(),medium.end());
     allMuscles.insert(allMuscles.end(),low.begin(), low.end());
+
+    // FIX: If no muscle priorities are set, use default muscle groups
+    if (allMuscles.empty()) {
+        allMuscles = {"Chest", "Back", "Shoulders", "Arms", "Legs", "Core"};
+        cout << "No muscle priorities set, using default rotation.\n";
+    }
+    
+    // FIX: Ensure high priority list is not empty to avoid division by zero
+    if (high.empty()) {
+        high = allMuscles; // Use all muscles as high priority if none specified
+    }
 
     for(int dayIdx=0;dayIdx<user.workoutDays.size(); dayIdx++) {
         string day=user.workoutDays[dayIdx];
@@ -494,10 +505,11 @@ vector<WorkoutSession> WorkoutPlanner::makePlan() {
         if (dayIdx<allMuscles.size()) {
             primaryMuscle=allMuscles[dayIdx];
         } else {
+            // FIX: Safe modulo operation - high is guaranteed to be non-empty now
             primaryMuscle=high[dayIdx%high.size()];
         }
 
-        //Get exercises for main muscle group
+        // Get exercises for main muscle group
         vector<Exercise> primaryExs=filterMuscles(available, {primaryMuscle});
         primaryExs=avoidRecent(primaryExs, day);
         primaryExs=limitRepeats(primaryExs);
@@ -510,7 +522,7 @@ vector<WorkoutSession> WorkoutPlanner::makePlan() {
             }
         }
 
-        //Fills in remaining spots with other exercises for a more balanced workout based on user muscle priotites
+        // Fill in remaining spots with other exercises
         if(dayExercises.size()<5) {
             vector<string> secondary;
             for (const string& muscle : allMuscles) {
@@ -531,8 +543,7 @@ vector<WorkoutSession> WorkoutPlanner::makePlan() {
 
         dayExercises=ensureMin(dayExercises, 5);
 
-        //Sets exercise times based on training goal.
-        //If the users training goal is Endurance, its sets and time between setss would be very different from Strength (no recommened for beginners)
+        // Set exercise times based on training goal
         for(Exercise& ex : dayExercises) {
             ex.estimatedDurationMinutes=getTime(ex, user.goal);
         }
@@ -554,7 +565,6 @@ vector<WorkoutSession> WorkoutPlanner::makePlan() {
     }
     return plan;
 }
-
 //Creates a  workout for people with only one day available, by chossing compound workouts
 vector<Exercise> WorkoutPlanner::makeDay() {
     vector<Exercise> compounds=getCompounds();
@@ -671,4 +681,5 @@ int WorkoutPlanner::getCalories(const vector<WorkoutSession>& plan) const {
         total+=session.getCaloriesBurned();
     }
     return total;
+
 }
