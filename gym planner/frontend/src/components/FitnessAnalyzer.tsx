@@ -212,7 +212,7 @@ export default function FitnessAnalyzer() {
       'Core': '',
       'Cardio': ''
     },
-    intensity: 5,
+    intensity: 3,
     availableEquipment: ['Bodyweight', 'Dumbbells', 'Bench', 'Barbell']
   })
 
