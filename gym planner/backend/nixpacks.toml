@@ -1,5 +1,0 @@
-[phases.build]
-cmds = ["chmod +x backend/build.sh", "backend/build.sh"]
-
-[start]
-cmd = "backend/start.sh"
