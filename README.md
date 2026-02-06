@@ -1,4 +1,4 @@
-# Smart Workout Planner
+# Smart Workout Planner :house:
 
 A C++ application that generates personalized workout plans based on user preferences, available equipment, and muscle group priorities.
 
